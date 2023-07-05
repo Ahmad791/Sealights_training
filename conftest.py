@@ -6,6 +6,6 @@ from webdriver_manager.firefox import GeckoDriverManager as firefoxDriverManager
 
 @pytest.fixture
 def driver():
-    d = webdriver.Firefox(executable_path=firefoxDriverManager().install())# always install latest drivers
+    d = webdriver.Firefox(service=firefoxService(firefoxDriverManager().install()))# always install latest drivers
     yield d
     d.quit()
