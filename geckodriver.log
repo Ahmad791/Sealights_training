@@ -68,3 +68,17 @@ Read port: 34137
 console.error: ({})
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://practicetestautomation.com."
 1688546968893	Marionette	INFO	Stopped listening on port 34137
+1688547302911	geckodriver	INFO	Listening on 127.0.0.1:51881
+1688547303925	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/usr/bin/firefox" "--marionette" "-no-remote" "-profile" "/tmp/rust_mozprofileNe1WUj"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1688547304773	Marionette	INFO	Marionette enabled
+1688547304777	Marionette	INFO	Listening on port 39865
+Read port: 39865
+1688547304936	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.error: ({})
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://practicetestautomation.com."
+1688547316016	Marionette	INFO	Stopped listening on port 39865
