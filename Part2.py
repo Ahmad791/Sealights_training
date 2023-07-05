@@ -7,6 +7,7 @@ import selenium.common.exceptions as e
 def test_1(driver: WebDriver):
     driver.get("https://practicetestautomation.com/practice-test-login/")# go to webpage 
 
+
     #Fill elements and submit
     try:
         driver.find_element(By.ID,"username").send_keys("student")
