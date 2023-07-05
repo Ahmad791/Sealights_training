@@ -38,9 +38,10 @@ jobs:
           chmod +x chromedriver
           sudo mv chromedriver /usr/local/bin/
 
-      - name: Run pytest
+      - name: Run pytest with Chrome
         run: |
-          pytest  Part2.py
+          pytest --headless --driver Chrome
+  
 
       - name: Check test results
         run: |
