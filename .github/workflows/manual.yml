@@ -1,44 +1,55 @@
-name: Run Selenium On GitHub Action
+name: E2E tests
+
 on:
-  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
-  scrape:
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checking out repo
-        uses: actions/checkout@v3
-      - name: Setting up Python
+      - uses: actions/checkout@v3
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
-      - name: Installing package list
-        run: apt list --installed    
-      - name: Removing previous chrome instances on runner 
-        run: sudo apt purge google-chrome-stable  
-        
-       # Need to fetch reqs if needed
-      - name: Installing all necessary packages
-        run: pip install chromedriver-autoinstaller selenium pyvirtualdisplay
-      - name: install packages
-        run: pip install -r requirements.txt
-      - name: Install xvfb
-        run: sudo apt-get install xvfb
-
-
-      - name: Run pytest with Chrome
+          python-version: '3.11'
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      - name: Install Dependencies
+        run: poetry install --no-interaction --no-root
+      - name: Install plugin
+        run: pip install pytest-github-actions-annotate-failures
+      - name: Test with pytest
         run: |
-          pytest Part2.py
-  
-
-      - name: Check test results
-        run: |
-          pytest_exit_code=$?
-          test_count=$(pytest --collect-only | grep "collected" | awk '{print $2}')
-          passed_count=$(pytest --collect-only | grep "collected" | awk '{print $6}')
-          failed_count=$((test_count - passed_count))
-          echo "Total tests: $test_count"
-          echo "Tests passed: $passed_count"
-          echo "Tests failed: $failed_count"
-          if [ $failed_count -gt 0 ]; then
-            exit 1
-          fi
+          source .venv/bin/activate
+          pytest --browser chrome_headless Part2.py
+      - name: Allure results
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        id: allure-report
+        with:
+          allure_results: allure-results
+          allure_report: allure-report
+          gh_pages: gh-pages
+          allure_history: allure-history
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
