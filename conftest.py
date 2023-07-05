@@ -9,9 +9,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 @pytest.fixture
 def driver():
-    try:
-        d = webdriver.Firefox(service=firefoxService(firefoxDriverManager().install()))# always install latest drivers
-    except:
-        d=webdriver.Chrome(service=chromeService(ChromeDriverManager().install()))
+    #try:
+    #    d = webdriver.Firefox(service=firefoxService(firefoxDriverManager().install()))# always install latest drivers
+    #except:
+    d=webdriver.Chrome(service=chromeService(ChromeDriverManager().install()))
     yield d
     d.quit()
