@@ -24,7 +24,6 @@ jobs:
         run: pip install pytest-github-actions-annotate-failures
       - name: Test with pytest
         run: |
-          source .venv/bin/activate
           pytest --browser chrome_headless Part2.py
       - name: Allure results
         uses: simple-elf/allure-report-action@master
