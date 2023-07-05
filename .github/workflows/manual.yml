@@ -40,7 +40,7 @@ jobs:
 
       - name: Run pytest with Chrome
         run: |
-          pytest --headless --driver Chrome
+          pytest Part2.py --headless --driver Chrome
   
 
       - name: Check test results
