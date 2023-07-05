@@ -1,4 +1,4 @@
-name: E2E tests
+name: tests
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
         run: pip install pytest-github-actions-annotate-failures
       - name: Test with pytest
         run: |
-          pytest Part2.py
+          pytest --alluredir=allure-results --browser remote Part2.py
       - name: Allure results
         uses: simple-elf/allure-report-action@master
         if: always()
