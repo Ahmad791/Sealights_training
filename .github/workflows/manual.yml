@@ -1,0 +1,41 @@
+name: Run pytest and check test results
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    name: Run pytest
+    runs-on: ubuntu-latest 
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.10  
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt 
+
+      - name: Run pytest
+        run: |
+          pytest  Part2.py
+
+      - name: Check test results
+        run: |
+          pytest_exit_code=$?
+          test_count=$(pytest --collect-only | grep "collected" | awk '{print $2}')
+          passed_count=$(pytest --collect-only | grep "collected" | awk '{print $6}')
+          failed_count=$((test_count - passed_count))
+          echo "Total tests: $test_count"
+          echo "Tests passed: $passed_count"
+          echo "Tests failed: $failed_count"
+          if [ $failed_count -gt 0 ]; then
+            exit 1
+          fi
