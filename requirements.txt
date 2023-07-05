@@ -1,0 +1,5 @@
+selenium>=3.0.0
+webdriver_manager>=3.0.0
+pytest>=6.0.0
+pytest-html>=3.0.0
+pytest-xdist>=2.0.0
