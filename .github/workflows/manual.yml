@@ -20,7 +20,7 @@ jobs:
       - name: Installing all necessary packages
         run: pip install chromedriver-autoinstaller selenium pyvirtualdisplay
       - name: install packages
-        run: pip install requirements.txt
+        run: pip install -r requirements.txt
       - name: Install xvfb
         run: sudo apt-get install xvfb
 
