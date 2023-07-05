@@ -5,7 +5,7 @@ import selenium.common.exceptions as e
 
 @pytest.mark.group1
 def test_1(driver: WebDriver):
-    driver.get("https://practicetestautomation.com/practice-test-login/")# go to webpage
+    driver.get("https://practicetestautomation.com/practice-test-login/")# go to webpage 
 
     #Fill elements and submit
     try:
