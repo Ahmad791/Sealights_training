@@ -24,7 +24,7 @@ jobs:
         run: pip install pytest-github-actions-annotate-failures
       - name: Test with pytest
         run: |
-          pytest --browser chrome_headless Part2.py
+          pytest Part2.py
       - name: Allure results
         uses: simple-elf/allure-report-action@master
         if: always()
