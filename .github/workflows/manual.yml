@@ -10,7 +10,7 @@ on:
 
 jobs:
   pytest_python_38:
-    name: Python 3.8
+    name: Python 3.10
     runs-on: ubuntu-latest
 
     services:
@@ -39,7 +39,5 @@ jobs:
           tree
       - name: Install dependencies and run tests
         run: |
-          pip install selenium pytest
-          echo "Now"
-          ls
+          pip install -r requrements.txt
           pytest
