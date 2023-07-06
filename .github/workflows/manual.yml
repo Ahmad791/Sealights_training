@@ -34,7 +34,7 @@ jobs:
         run: |
           echo "First"
           ls
-          cd ../../
+          cd ../../../
           echo "second"
           tree
       - name: Install dependencies and run tests
