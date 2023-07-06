@@ -41,5 +41,6 @@ jobs:
           tree
       - name: Install dependencies and run tests
         run: |
+          cd Sealights_training
           pip install -r requirements.txt
           pytest
