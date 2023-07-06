@@ -33,4 +33,4 @@ jobs:
       - name: Install dependencies and run tests
         run: |
           pip install selenium pytest
-          pytest ../../Part2.py
+          pytest 
