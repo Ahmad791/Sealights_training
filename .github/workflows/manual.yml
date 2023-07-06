@@ -30,8 +30,16 @@ jobs:
           tar -zxvf ~/geckodriver.tar.gz -C /opt/
           export PATH=$PATH:/opt/
 
+      - name: print
+        run: |
+          echo "First"
+          ls
+          cd ..
+          echo "second"
+          ls
       - name: Install dependencies and run tests
         run: |
           pip install selenium pytest
+          echo "Now"
           ls
           pytest
