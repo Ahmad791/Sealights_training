@@ -34,9 +34,9 @@ jobs:
         run: |
           echo "First"
           ls
-          cd ..
+          cd ../../
           echo "second"
-          ls
+          tree
       - name: Install dependencies and run tests
         run: |
           pip install selenium pytest
